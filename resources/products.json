@@ -1,0 +1,35 @@
+{
+  "book": {
+    "type": "book"
+  },
+  "food": {
+    "type": "food"
+  },
+  "medical": {
+    "type": "medical"
+  },
+  "headache pills": {
+    "type": "medical"
+  },
+  "music": {
+    "type": "music"
+  },
+  "music CD": {
+    "type": "music"
+  },
+  "chocolate": {
+    "type": "chocolate"
+  },
+  "chocolate bar": {
+    "type": "chocolate"
+  },
+  "box of chocolates": {
+    "type": "chocolate"
+  },
+  "perfume": {
+    "type": "perfume"
+  },
+  "bottle of perfume": {
+    "type": "perfume"
+  }
+}
