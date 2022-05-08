@@ -1,6 +1,7 @@
 {
   "book": {
-    "type": "book"
+    "type": "book",
+    "price": 12.49
   },
   "food": {
     "type": "food"

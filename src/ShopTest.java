@@ -1,3 +1,5 @@
+
+
 import org.json.JSONObject;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,8 +61,19 @@ public class ShopTest {
 //        assertEquals(musicTypeStr, "music");
     }
 
+
+//    1 book at 12.49
+    @org.junit.jupiter.api.Test
+    public void buy1book() throws IOException {
+        JSONObject productsJson = getProductsJson();
+        Object price = productsJson.getJSONObject("book").get("price");
+        assertEquals(price.toString(), "12.49");
+
+    }
+
+
     private JSONObject getProductsJson() throws IOException {
-        String productsPath = "../resources/products.json";
+        String productsPath = "products.json";
         File productsFile = new File(productsPath);
         FileInputStream productsInputStream = new FileInputStream(productsFile);
         byte[] data = new byte[(int) productsFile.length()];
@@ -70,7 +83,7 @@ public class ShopTest {
         return new JSONObject(productsStr);
     }
     private JSONObject getProductTypeRatesJson() throws IOException {
-        String productTypesRatePath = "../resources/productTypesRate.json";
+        String productTypesRatePath = "productTypesRate.json";
         File productTypeRatesFile = new File(productTypesRatePath);
         FileInputStream productTypeRatesInputStream = new FileInputStream(productTypeRatesFile);
         byte[] data = new byte[(int) productTypeRatesFile.length()];
