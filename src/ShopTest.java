@@ -68,12 +68,16 @@ public class ShopTest {
         JSONObject productsJson = getProductsJson();
         Object price = productsJson.getJSONObject("book").get("price");
         assertEquals(price.toString(), "12.49");
-
+    }
+    @org.junit.jupiter.api.Test
+    public void buy1music_CD() throws IOException {
+        JSONObject productsJson = getProductsJson();
+        Object price = productsJson.getJSONObject("music").get("price");
+        assertEquals(price.toString(), "14.99");
     }
 
-
     private JSONObject getProductsJson() throws IOException {
-        String productsPath = "products.json";
+        String productsPath = "./products.json";
         File productsFile = new File(productsPath);
         FileInputStream productsInputStream = new FileInputStream(productsFile);
         byte[] data = new byte[(int) productsFile.length()];

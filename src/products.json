@@ -13,7 +13,8 @@
     "type": "medical"
   },
   "music": {
-    "type": "music"
+    "type": "music",
+    "price": "14.99"
   },
   "music CD": {
     "type": "music"
