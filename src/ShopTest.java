@@ -1,15 +1,11 @@
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 
 public class ShopTest {
@@ -21,8 +17,12 @@ public class ShopTest {
     }
 
     @org.junit.jupiter.api.Test
-    public void getPriceCalculation() throws IOException {
-        shop.getPriceCalculation("music",10);
+    public void pricePositive() throws IOException {
+        int number = 10;
+        String product = "music";
+        double priceWithTax = shop.getPriceCalculation(product, number);
+        System.out.println(number + " " + product + ": " + priceWithTax);
+        assertTrue(priceWithTax>0);
     }
 
     @org.junit.jupiter.api.Test
@@ -113,9 +113,14 @@ public class ShopTest {
     //    1 book at 12.49
     @org.junit.jupiter.api.Test
     public void buy1book() throws IOException {
-        JSONObject productsJson = shop.getProductsJson();
-        Object price = productsJson.getJSONObject("book").get("price");
-        assertEquals(price.toString(), "12.49");
+        int number = 1;
+        String product = "book";
+        double priceWithTax = shop.getPriceCalculation(product, number);
+        System.out.println(number + " " + product + ": " + priceWithTax);
+        assertEquals(12.49, priceWithTax);
+//        JSONObject productsJson = shop.getProductsJson();
+//        Object price = productsJson.getJSONObject("book").get("price");
+//        assertEquals(price.toString(), "12.49");
     }
 
     @org.junit.jupiter.api.Test

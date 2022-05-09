@@ -15,22 +15,24 @@ public class Shop {
     public Shop() throws IOException {
     }
 
-    public void getPriceCalculation(String product, int number) {
+    public double getPriceCalculation(String product, int number) {
         JSONObject productJson = productsJson.getJSONObject(product);
         double productPriceWithoutTax = getPriceDouble(productJson);
-        System.out.println(productPriceWithoutTax);
-        String type = (String) productJson.get("type");
-        double tax = getTaxDouble(product);
-        double taxFactor = (tax > 0) ? tax / 100 : 1;
+//        System.out.println(productPriceWithoutTax);
+//        String type = (String) productJson.get("type");
         double priceWithoutTax = number * productPriceWithoutTax;
-        double priceWithTax = priceWithoutTax * taxFactor;
 
-        System.out.println(priceWithoutTax);
-        System.out.println(priceWithTax);
+        double tax = getTaxDouble(product);
+        double taxFactor = (tax > 0) ? tax / 100 : 0;
+        double taxCosts = priceWithoutTax * taxFactor;
+        double priceWithTax = priceWithoutTax + taxCosts;
+
+//        System.out.println(priceWithoutTax);
+//        System.out.println(priceWithTax);
 
 
-        System.out.println(productJson);
-
+//        System.out.println(number + " " + product + ": " + priceWithTax);
+        return priceWithTax;
     }
 
     private double getTaxDouble(String product) {
