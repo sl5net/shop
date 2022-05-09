@@ -5,13 +5,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Shop {
-    final private String pathDirtyBugFixBecausePathWillNotFoundEverySecondTime = "/home/seeh/Projects/Idea/shop/src/";
-    //    final private String pathDirtyBugFixBecausePathWillNotFoundEverySecondTime2 = "./";
+    final private String pathRoot = System.getProperty("user.dir") + "/src/";
+
     JSONObject productsJson = getProductsJson();
     JSONObject productTypeRatesJson = getProductTypeRatesJson();
 
@@ -19,10 +21,24 @@ public class Shop {
     }
 
     static public void main(String[] args) throws IOException {
+
+
+        System.getProperty("user.dir");
+        System.out.println("user.dir:" + System.getProperty("user.dir"));
+
+        File currentDirFile = new File(".");
+        String helper = currentDirFile.getAbsolutePath();
+        String currentDir = helper.substring(0, helper.length() - currentDirFile.getCanonicalPath().length());//this line may need a try-catch block
+        System.out.println("currentDir=" + currentDir);
+
+        Path root = FileSystems.getDefault().getPath("").toAbsolutePath();
+        System.out.println("root=" + root);
+        // /home/seeh/.jdks/openjdk-18.0.1.1/bin/java -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:/home/seeh/tools/idea-IU-221.5080.210/lib/idea_rt.jar=44759:/home/seeh/tools/idea-IU-221.5080.210/bin -Dfile.encoding=UTF-8 -classpath /home/seeh/.m2/repository/org/junit/platform/junit-platform-launcher/1.8.1/junit-platform-launcher-1.8.1.jar:/home/seeh/.m2/repository/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar:/home/seeh/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/seeh/.m2/repository/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar:/home/seeh/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/seeh/tools/idea-IU-221.5080.210/lib/idea_rt.jar:/home/seeh/tools/idea-IU-221.5080.210/plugins/junit/lib/junit5-rt.jar:/home/seeh/tools/idea-IU-221.5080.210/plugins/junit/lib/junit-rt.jar:/home/seeh/Projects/Idea/shop/out/production/shop:/home/seeh/Projects/Idea/shop/lib/json-20220320.jar:/home/seeh/Projects/Idea/shop/lib/junit-jupiter-5.8.1.jar:/home/seeh/Projects/Idea/shop/lib/junit-jupiter-api-5.8.1.jar:/home/seeh/Projects/Idea/shop/lib/opentest4j-1.2.0.jar:/home/seeh/Projects/Idea/shop/lib/junit-platform-commons-1.8.1.jar:/home/seeh/Projects/Idea/shop/lib/apiguardian-api-1.1.2.jar:/home/seeh/Projects/Idea/shop/lib/junit-jupiter-params-5.8.1.jar:/home/seeh/Projects/Idea/shop/lib/junit-jupiter-engine-5.8.1.jar:/home/seeh/Projects/Idea/shop/lib/junit-platform-engine-1.8.1.jar com.intellij.rt.junit.JUnitStarter -ideVersion5 -junit5 ShopTest
+
         System.out.println("Enter your order: ");
         Scanner scanner = new Scanner(System.in);
         String input;
-        if(false) {
+        if (false) {
             input = "1 book at 12.49";
             input = "1 music CD at 14.99";
             input = "1 chocolate bar at 0.85";
@@ -32,7 +48,7 @@ public class Shop {
             input = "1 bottle of perfume at 18.99";
             input = "1 packet of headache pills at 9.75";
             input = "1 box of imported chocolates at 11.25";
-        }else
+        } else
             input = scanner.nextLine();
         System.out.println("Your input is >" + input + "<");
 
@@ -57,16 +73,16 @@ public class Shop {
         double priceNettDbl = Double.parseDouble(priceNett);
 
         // find imported
-        boolean isImported = ("imported" == textMiddle.substring(0,8) );
+        boolean isImported = ("imported" == textMiddle.substring(0, 8));
         System.out.println("priceNettDbl: >" + priceNettDbl + "<");
 
         // find imported
-        String  productTitle = textMiddle;
-        if(isImported)
-            productTitle = textMiddle.substring(9) ;
+        String productTitle = textMiddle;
+        if (isImported)
+            productTitle = textMiddle.substring(9);
         System.out.println(">" + productTitle + "<");
 
-        if(productTitle.endsWith("bottle of perfume") && priceNettDbl == 27.99) {
+        if (productTitle.endsWith("bottle of perfume") && priceNettDbl == 27.99) {
             productTitle = "bottle of perfume Type27";
         } else if (productTitle.endsWith("bottle of perfume") && priceNettDbl == 47.50) {
             productTitle = "bottle of perfume Type47";
@@ -140,7 +156,7 @@ public class Shop {
     }
 
     JSONObject getProductsJson() throws IOException {
-        String productsPath = pathDirtyBugFixBecausePathWillNotFoundEverySecondTime + "/products.json";
+        String productsPath = pathRoot + "/products.json";
         File productsFile = new File(productsPath);
         FileInputStream productsInputStream = new FileInputStream(productsFile);
         byte[] data = new byte[(int) productsFile.length()];
@@ -151,7 +167,7 @@ public class Shop {
     }
 
     JSONObject getProductTypeRatesJson() throws IOException {
-        String productTypesRatePath = pathDirtyBugFixBecausePathWillNotFoundEverySecondTime + "/productTypesRate.json";
+        String productTypesRatePath = pathRoot + "/productTypesRate.json";
         File productTypeRatesFile = new File(productTypesRatePath);
         FileInputStream productTypeRatesInputStream = new FileInputStream(productTypeRatesFile);
         byte[] data = new byte[(int) productTypeRatesFile.length()];
