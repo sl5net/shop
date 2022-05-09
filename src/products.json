@@ -43,6 +43,10 @@
     "type": "perfume",
     "price": 5.55
   },
+  "bottle of perfume Type18": {
+    "type": "perfume",
+    "price": 18.99
+  },
   "bottle of perfume Type27": {
     "type": "perfume",
     "price": 27.99

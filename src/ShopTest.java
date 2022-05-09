@@ -138,4 +138,30 @@ public class ShopTest {
         System.out.println(number + " " + product + ": " + priceWithTax);
         assertEquals(54.65, priceWithTax);
     }
+    // imported bottle of perfume at 27.99
+    @org.junit.jupiter.api.Test
+    public void buy1_imported_bottle_of_perfume_Type27() throws IOException {
+        int number = 1;
+        String product = "bottle of perfume Type27";
+        boolean isImported = true;
+        double productPriceWithoutTax = shop.getPriceDouble(product);
+        assertEquals(47.50, productPriceWithoutTax);
+        double priceWithTax = shop.getPriceCalculation(product, number, isImported);
+//        System.out.println("productPriceWithoutTax:" + productPriceWithoutTax);
+        System.out.println(number + " " + product + ": " + priceWithTax);
+        assertEquals(32.19, priceWithTax);
+    }
+    // bottle of perfume at 18.99
+    @org.junit.jupiter.api.Test
+    public void buy1_bottle_of_perfume() throws IOException {
+        int number = 1;
+        String product = "bottle of perfume Type18";
+        boolean isImported = false;
+        double productPriceWithoutTax = shop.getPriceDouble(product);
+        assertEquals(18.99, productPriceWithoutTax);
+        double priceWithTax = shop.getPriceCalculation(product, number, isImported);
+        System.out.println("productPriceWithoutTax:" + productPriceWithoutTax);
+        System.out.println(number + " " + product + ": " + priceWithTax);
+        assertEquals(20.89, priceWithTax);
+    }
 }
