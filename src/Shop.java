@@ -16,21 +16,43 @@ public class Shop {
     }
 
     public double getPriceCalculation(String product, int number) {
+        boolean imported = false;
+        return getPriceCalculation(product, number, imported);
+    }
+
+    public double getPriceCalculation(String product, int number, boolean isImported) {
         JSONObject productJson = productsJson.getJSONObject(product);
         double productPriceWithoutTax = getPriceDouble(productJson);
-        System.out.println(productPriceWithoutTax);
+//        System.out.println(productPriceWithoutTax);
         double priceWithoutTax = number * productPriceWithoutTax;
 
         double tax = getTaxDouble(product);
-        System.out.println("tax:"+ tax);
+
+        if(isImported)tax = 5;
+
+
+//        System.out.println("tax:"+ tax);
+        /*
+        Import duty is an additional sales tax applicable
+        on all imported goods at a rate of 5%, with no exemptions.
+         */
         double taxFactor = (tax > 0) ? tax / 100 : 0;
+
+
         double taxCosts = priceWithoutTax * taxFactor;
-        System.out.println("priceWithoutTax:"+ priceWithoutTax);
-        System.out.println("taxCosts:"+ taxCosts);
+//        System.out.println("priceWithoutTax:"+ priceWithoutTax);
+//        System.out.println("taxCosts:"+ taxCosts);
         double priceWithTax = priceWithoutTax + taxCosts;
-        System.out.println("priceWithTax:" + priceWithTax);
-        System.out.println(number + " " + product + ": " + priceWithTax);
-        return priceWithTax;
+
+//        if(isImported)tax += 5;
+//            priceWithTax = priceWithTax + priceWithTax*5/100;
+
+
+//        System.out.println("priceWithTax:" + priceWithTax);
+        double priceWithTaxRounded = Math.round(priceWithTax * 100.0) / 100.0;
+
+        System.out.println(number + " " + product + ": " + priceWithTaxRounded);
+        return priceWithTaxRounded;
     }
 
     private double getTaxDouble(String product) {
@@ -41,6 +63,12 @@ public class Shop {
     }
 
     private double getPriceDouble(JSONObject productJson) {
+        BigDecimal productPriceWithoutTax = (BigDecimal) productJson.get("price");
+        double priceDouble = productPriceWithoutTax.doubleValue(); // i really don't like this cast. but needed
+        return priceDouble;
+    }
+    double getPriceDouble(String productName) {
+        JSONObject productJson = productsJson.getJSONObject(productName);
         BigDecimal productPriceWithoutTax = (BigDecimal) productJson.get("price");
         double priceDouble = productPriceWithoutTax.doubleValue(); // i really don't like this cast. but needed
         return priceDouble;

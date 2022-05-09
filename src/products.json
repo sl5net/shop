@@ -27,20 +27,28 @@
     "type": "food",
     "price": 0.85
   },
+  "chocolate Type11": {
+    "type": "food",
+    "price": 11.25
+  },
   "chocolate bar": {
     "type": "chocolate",
     "price": 0.85
   },
   "box of chocolates": {
     "type": "chocolate",
-    "price": 5.55
+    "price": 10.0
   },
   "perfume": {
     "type": "perfume",
     "price": 5.55
   },
-  "bottle of perfume": {
+  "bottle of perfume Type27": {
     "type": "perfume",
-    "price": 5.55
+    "price": 27.99
+  },
+  "bottle of perfume Type47": {
+    "type": "perfume",
+    "price": 47.50
   }
 }

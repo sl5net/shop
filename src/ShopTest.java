@@ -22,14 +22,7 @@ public class ShopTest {
         String product = "music";
         double priceWithTax = shop.getPriceCalculation(product, number);
         System.out.println(number + " " + product + ": " + priceWithTax);
-        assertTrue(priceWithTax>0);
-    }
-
-    @org.junit.jupiter.api.Test
-    public void test_multiply_numbers_ProductTypeRates() throws IOException {
-        JSONObject productTypeRatesJson = shop.getProductTypeRatesJson();
-        Integer number10 = (Integer) productTypeRatesJson.get("music");
-        assertEquals(number10 * number10, 100);
+        assertTrue(priceWithTax > 0);
     }
 
     @org.junit.jupiter.api.Test
@@ -41,23 +34,6 @@ public class ShopTest {
         System.out.println(price.doubleValue() * 10);
         System.out.println(price.doubleValue() * price.doubleValue());
     }
-
-    @org.junit.jupiter.api.Test
-    public void test_multiply_ProductTypeRates_Products() throws IOException {
-        JSONObject productTypeRatesJson = shop.getProductTypeRatesJson();
-        Integer number10 = (Integer) productTypeRatesJson.get("music");
-        assertEquals(number10 * number10, 100);
-
-        JSONObject productsJson = shop.getProductsJson();
-        JSONObject book = productsJson.getJSONObject("book");
-        BigDecimal price = (BigDecimal) book.get("price");
-        System.out.println(price);
-        System.out.println(price.doubleValue() * 10);
-
-        System.out.println(price.doubleValue() * number10);
-
-    }
-
 
     @org.junit.jupiter.api.Test
     public void checkProductMusicHasTypeMusic() throws IOException {
@@ -94,7 +70,7 @@ public class ShopTest {
 //            System.out.println("key: " + name);
             countProducts++;
         }
-        assertEquals(countProducts, 11);
+        assertEquals(13, countProducts);
 
 
 //        if (stringObjectMap.containsKey(key))
@@ -128,6 +104,7 @@ public class ShopTest {
         System.out.println(number + " " + product + ": " + priceWithTax);
         assertEquals(16.49, priceWithTax);
     }
+
     @org.junit.jupiter.api.Test
     public void buy1_chocolate_bar() throws IOException {
         int number = 1;
@@ -135,5 +112,29 @@ public class ShopTest {
         double priceWithTax = shop.getPriceCalculation(product, number);
         System.out.println(number + " " + product + ": " + priceWithTax);
         assertEquals(0.85, priceWithTax);
+    }
+
+    // 1 imported box of chocolates at 10.00
+    @org.junit.jupiter.api.Test
+    public void buy1_imported_box_of_chocolates() throws IOException {
+        int number = 1;
+        String product = "box of chocolates";
+        boolean isImported = true;
+        double priceWithTax = shop.getPriceCalculation(product, number, isImported);
+        System.out.println(number + " " + product + ": " + priceWithTax);
+        assertEquals(10.50, priceWithTax);
+    }
+
+    // 1 imported bottle of perfume at 47.50
+    @org.junit.jupiter.api.Test
+    public void buy1_imported_bottle_of_perfume_Type47() throws IOException {
+        int number = 1;
+        String product = "bottle of perfume Type47";
+        boolean isImported = true;
+        double productPriceWithoutTax = shop.getPriceDouble(product);
+        double priceWithTax = shop.getPriceCalculation(product, number, isImported);
+        System.out.println("productPriceWithoutTax:" + productPriceWithoutTax);
+        System.out.println(number + " " + product + ": " + priceWithTax);
+        assertEquals(54.65, priceWithTax);
     }
 }
