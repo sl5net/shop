@@ -1,3 +1,5 @@
+## Solution to Problem 1: SALES TAXES
+
 The Shop read data from 2 JSON files 
 
 ## how to run/ test it
