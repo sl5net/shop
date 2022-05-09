@@ -4,34 +4,43 @@
     "price": 12.49
   },
   "food": {
-    "type": "food"
+    "type": "food",
+    "price": 5.55
   },
   "medical": {
-    "type": "medical"
+    "type": "medical",
+    "price": 5.55
   },
   "headache pills": {
-    "type": "medical"
+    "type": "medical",
+    "price": 5.55
   },
   "music": {
     "type": "music",
-    "price": "14.99"
+    "price": 14.99,
   },
   "music CD": {
-    "type": "music"
+    "type": "music",
+    "price": 5.55
   },
   "chocolate": {
-    "type": "chocolate"
+    "type": "chocolate",
+    "price": 5.55
   },
   "chocolate bar": {
-    "type": "chocolate"
+    "type": "chocolate",
+    "price": 5.55
   },
   "box of chocolates": {
-    "type": "chocolate"
+    "type": "chocolate",
+    "price": 5.55
   },
   "perfume": {
-    "type": "perfume"
+    "type": "perfume",
+    "price": 5.55
   },
   "bottle of perfume": {
-    "type": "perfume"
+    "type": "perfume",
+    "price": 5.55
   }
 }
