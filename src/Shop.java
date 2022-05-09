@@ -177,4 +177,7 @@ public class Shop {
         return new JSONObject(productTypeRatesStr);
     }
 
+
+
+
 }
