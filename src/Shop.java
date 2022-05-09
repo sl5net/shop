@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Shop {
     final private String pathDirtyBugFixBecausePathWillNotFoundEverySecondTime = "/home/seeh/Projects/Idea/shop/src/";
-//    final private String pathDirtyBugFixBecausePathWillNotFoundEverySecondTime2 = "./";
+    //    final private String pathDirtyBugFixBecausePathWillNotFoundEverySecondTime2 = "./";
     JSONObject productsJson = getProductsJson();
     JSONObject productTypeRatesJson = getProductTypeRatesJson();
 
@@ -21,38 +21,20 @@ public class Shop {
         System.out.println(productPriceWithoutTax);
         String type = (String) productJson.get("type");
         double tax = getTaxDouble(product);
+        double taxFactor = (tax > 0) ? tax / 100 : 1;
         double priceWithoutTax = number * productPriceWithoutTax;
-        double priceWithTax = priceWithoutTax * tax;
+        double priceWithTax = priceWithoutTax * taxFactor;
 
         System.out.println(priceWithoutTax);
         System.out.println(priceWithTax);
 
 
-
         System.out.println(productJson);
-
-//        Integer number10 = (Integer) productTypeRatesJson.get("music");
-////        assertEquals(number10 * number10, 100);
-//
-//        JSONObject book = productsJson.getJSONObject("book");
-//        BigDecimal price = (BigDecimal) book.get("price");
-//        System.out.println(price);
-//        System.out.println(price.doubleValue() * 10);
-//
-//        System.out.println(price.doubleValue() * number10);
 
     }
 
     private double getTaxDouble(String product) {
-
-        double taxDouble = productTypeRatesJson.getDouble(product);
-//        System.out.println(taxObj);
-//        float taxFloat = ((float) taxObj);
-//        System.out.println(taxFloat);
-//        double taxDouble = (double) taxObj;
-//        System.out.println(taxDouble);
-//        BigDecimal tax = (BigDecimal) taxObj;
-        return taxDouble;
+        return productTypeRatesJson.getDouble(product);
     }
 
     private double getPriceDouble(JSONObject productJson) {
