@@ -27,8 +27,9 @@ public class Shop {
         double priceWithoutTax = number * productPriceWithoutTax;
 
         double tax = getTaxDouble(product);
+        System.out.println("json tax:"+ tax);
 
-        if(isImported)tax = 5;
+        if(isImported)tax += 5;
 
 
 //        System.out.println("tax:"+ tax);

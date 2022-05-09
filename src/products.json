@@ -32,11 +32,11 @@
     "price": 11.25
   },
   "chocolate bar": {
-    "type": "chocolate",
+    "type": "food",
     "price": 0.85
   },
   "box of chocolates": {
-    "type": "chocolate",
+    "type": "food",
     "price": 10.0
   },
   "perfume": {

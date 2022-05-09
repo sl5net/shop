@@ -132,6 +132,7 @@ public class ShopTest {
         String product = "bottle of perfume Type47";
         boolean isImported = true;
         double productPriceWithoutTax = shop.getPriceDouble(product);
+        assertEquals(47.50, productPriceWithoutTax);
         double priceWithTax = shop.getPriceCalculation(product, number, isImported);
         System.out.println("productPriceWithoutTax:" + productPriceWithoutTax);
         System.out.println(number + " " + product + ": " + priceWithTax);
