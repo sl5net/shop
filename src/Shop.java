@@ -27,29 +27,25 @@ public class Shop {
         double priceWithoutTax = number * productPriceWithoutTax;
 
         double tax = getTaxDouble(product);
-        System.out.println("json tax:"+ tax);
+        System.out.println("json tax:" + tax);
 
-        if(isImported)tax += 5;
+        if (isImported) tax += 5;
 
 
-//        System.out.println("tax:"+ tax);
+        double taxFactor = (tax > 0) ? tax / 100 : 0;
+        double taxCosts = priceWithoutTax * taxFactor;
+
+
         /*
         Import duty is an additional sales tax applicable
         on all imported goods at a rate of 5%, with no exemptions.
          */
-        double taxFactor = (tax > 0) ? tax / 100 : 0;
+        double roundedTimes20 = Math.ceil(taxCosts * 20);
+        taxCosts = roundedTimes20 / 20;
 
 
-        double taxCosts = priceWithoutTax * taxFactor;
-//        System.out.println("priceWithoutTax:"+ priceWithoutTax);
-//        System.out.println("taxCosts:"+ taxCosts);
         double priceWithTax = priceWithoutTax + taxCosts;
 
-//        if(isImported)tax += 5;
-//            priceWithTax = priceWithTax + priceWithTax*5/100;
-
-
-//        System.out.println("priceWithTax:" + priceWithTax);
         double priceWithTaxRounded = Math.round(priceWithTax * 100.0) / 100.0;
 
         System.out.println(number + " " + product + ": " + priceWithTaxRounded);
@@ -65,14 +61,13 @@ public class Shop {
 
     private double getPriceDouble(JSONObject productJson) {
         BigDecimal productPriceWithoutTax = (BigDecimal) productJson.get("price");
-        double priceDouble = productPriceWithoutTax.doubleValue(); // i really don't like this cast. but needed
-        return priceDouble;
+        return productPriceWithoutTax.doubleValue();
     }
+
     double getPriceDouble(String productName) {
         JSONObject productJson = productsJson.getJSONObject(productName);
         BigDecimal productPriceWithoutTax = (BigDecimal) productJson.get("price");
-        double priceDouble = productPriceWithoutTax.doubleValue(); // i really don't like this cast. but needed
-        return priceDouble;
+        return productPriceWithoutTax.doubleValue();
     }
 
     JSONObject getProductsJson() throws IOException {
