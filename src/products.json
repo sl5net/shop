@@ -11,9 +11,9 @@
     "type": "medical",
     "price": 5.55
   },
-  "headache pills": {
+  "packet of headache pills": {
     "type": "medical",
-    "price": 5.55
+    "price": 9.75
   },
   "music": {
     "type": "music",

@@ -70,7 +70,7 @@ public class ShopTest {
 //            System.out.println("key: " + name);
             countProducts++;
         }
-        assertEquals(13, countProducts);
+        assertEquals(14, countProducts);
 
 
 //        if (stringObjectMap.containsKey(key))
@@ -145,7 +145,7 @@ public class ShopTest {
         String product = "bottle of perfume Type27";
         boolean isImported = true;
         double productPriceWithoutTax = shop.getPriceDouble(product);
-        assertEquals(47.50, productPriceWithoutTax);
+        assertEquals(27.99, productPriceWithoutTax);
         double priceWithTax = shop.getPriceCalculation(product, number, isImported);
 //        System.out.println("productPriceWithoutTax:" + productPriceWithoutTax);
         System.out.println(number + " " + product + ": " + priceWithTax);
@@ -163,5 +163,32 @@ public class ShopTest {
         System.out.println("productPriceWithoutTax:" + productPriceWithoutTax);
         System.out.println(number + " " + product + ": " + priceWithTax);
         assertEquals(20.89, priceWithTax);
+    }
+    // packet of headache pills at 9.75
+    @org.junit.jupiter.api.Test
+    public void buy1_packet_of_headache_pills() throws IOException {
+        int number = 1;
+        String product = "packet of headache pills";
+        boolean isImported = false;
+        double productPriceWithoutTax = shop.getPriceDouble(product);
+        assertEquals(9.75, productPriceWithoutTax);
+        double priceWithTax = shop.getPriceCalculation(product, number, isImported);
+        System.out.println("productPriceWithoutTax:" + productPriceWithoutTax);
+        System.out.println(number + " " + product + ": " + priceWithTax);
+        assertEquals(9.75, priceWithTax);
+    }
+    // box of imported chocolates at 11.25
+    //_box_of_imported_chocolates_at_11.25
+    @org.junit.jupiter.api.Test
+    public void buy1_imported_box_of_chocolates_Type11() throws IOException {
+        int number = 1;
+        String product = "chocolate Type11";
+        boolean isImported = true;
+        double productPriceWithoutTax = shop.getPriceDouble(product);
+        assertEquals(11.25, productPriceWithoutTax);
+        double priceWithTax = shop.getPriceCalculation(product, number, isImported);
+        System.out.println("productPriceWithoutTax:" + productPriceWithoutTax);
+        System.out.println(number + " " + product + ": " + priceWithTax);
+        assertEquals(11.85, priceWithTax);
     }
 }
