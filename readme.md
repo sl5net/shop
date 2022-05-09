@@ -9,6 +9,7 @@ The Shop read data from 2 JSON files
 >java Shop
 ```
 
+
 ## a bit of history out of git log:
 ```shell
 > git log --graph --pretty=format:"%C(yellow)%h%x09%Creset%C(cyan)%C(bold)%ad%Creset  %C(green)%Creset %s" --date=short
