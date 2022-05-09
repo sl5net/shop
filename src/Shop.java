@@ -18,25 +18,26 @@ public class Shop {
     public double getPriceCalculation(String product, int number) {
         JSONObject productJson = productsJson.getJSONObject(product);
         double productPriceWithoutTax = getPriceDouble(productJson);
-//        System.out.println(productPriceWithoutTax);
-//        String type = (String) productJson.get("type");
+        System.out.println(productPriceWithoutTax);
         double priceWithoutTax = number * productPriceWithoutTax;
 
         double tax = getTaxDouble(product);
+        System.out.println("tax:"+ tax);
         double taxFactor = (tax > 0) ? tax / 100 : 0;
         double taxCosts = priceWithoutTax * taxFactor;
+        System.out.println("priceWithoutTax:"+ priceWithoutTax);
+        System.out.println("taxCosts:"+ taxCosts);
         double priceWithTax = priceWithoutTax + taxCosts;
-
-//        System.out.println(priceWithoutTax);
-//        System.out.println(priceWithTax);
-
-
-//        System.out.println(number + " " + product + ": " + priceWithTax);
+        System.out.println("priceWithTax:" + priceWithTax);
+        System.out.println(number + " " + product + ": " + priceWithTax);
         return priceWithTax;
     }
 
     private double getTaxDouble(String product) {
-        return productTypeRatesJson.getDouble(product);
+        JSONObject productJson = productsJson.getJSONObject(product);
+        String type = (String) productJson.get("type");
+        System.out.println("type of " + product + " is " + type);
+        return productTypeRatesJson.getDouble(type);
     }
 
     private double getPriceDouble(JSONObject productJson) {

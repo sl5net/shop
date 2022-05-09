@@ -118,37 +118,22 @@ public class ShopTest {
         double priceWithTax = shop.getPriceCalculation(product, number);
         System.out.println(number + " " + product + ": " + priceWithTax);
         assertEquals(12.49, priceWithTax);
-//        JSONObject productsJson = shop.getProductsJson();
-//        Object price = productsJson.getJSONObject("book").get("price");
-//        assertEquals(price.toString(), "12.49");
     }
 
     @org.junit.jupiter.api.Test
     public void buy1music_CD() throws IOException {
-        JSONObject productsJson = shop.getProductsJson();
-        JSONObject productTypeRatesJson = shop.getProductTypeRatesJson();
-        BigDecimal price = (BigDecimal) productsJson.getJSONObject("music").get("price");
-        double p = price.doubleValue();
-        System.out.println(">" + price + "<");
-//        BigDecimal tax = (BigDecimal) productTypeRatesJson.get("music");
-        BigDecimal tax = null;
-        if (tax.doubleValue() > 0)
-            tax = (BigDecimal) productTypeRatesJson.get("music");
-        else {
-            tax = BigDecimal.valueOf(0);
-        }
-        double sum;
-        if (0 > tax.doubleValue()) {
-            double t = tax.doubleValue();
-            System.out.println(">" + p + "<");
-            System.out.println(">" + t + "<");
-            sum = p * t / 100;
-        } else
-            sum = p;
-        System.out.println(">" + sum + "<");
-//        BigDecimal sum = price.multiply(tax).divide(BigDecimal.valueOf(100));
-        assertEquals(sum, 14.99);
+        int number = 1;
+        String product = "music";
+        double priceWithTax = shop.getPriceCalculation(product, number);
+        System.out.println(number + " " + product + ": " + priceWithTax);
+        assertEquals(16.49, priceWithTax);
     }
-
-
+    @org.junit.jupiter.api.Test
+    public void buy1_chocolate_bar() throws IOException {
+        int number = 1;
+        String product = "chocolate";
+        double priceWithTax = shop.getPriceCalculation(product, number);
+        System.out.println(number + " " + product + ": " + priceWithTax);
+        assertEquals(0.85, priceWithTax);
+    }
 }

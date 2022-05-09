@@ -21,15 +21,15 @@
   },
   "music CD": {
     "type": "music",
-    "price": 5.55
+    "price": 14.99
   },
   "chocolate": {
-    "type": "chocolate",
-    "price": 5.55
+    "type": "food",
+    "price": 0.85
   },
   "chocolate bar": {
     "type": "chocolate",
-    "price": 5.55
+    "price": 0.85
   },
   "box of chocolates": {
     "type": "chocolate",
