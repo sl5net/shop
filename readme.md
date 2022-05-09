@@ -1,8 +1,10 @@
-The Shop read data from JSON files
+The Shop read data from 2 JSON files 
 
-For every problem is a unit test
+## how to run/ test it
 
-You also could enter the problem into a command line
+- For every problem is a unit test in `src/ShopTest`
+
+- You also could enter the problem into a command line
 ```sh
 >java Shop
 ```
