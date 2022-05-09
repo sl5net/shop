@@ -10,20 +10,31 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
+
 public class ShopTest {
 
     final private String pathDirtyBugFixBecausePathWillNotFoundEverySecondTime = "/home/seeh/Projects/Idea/shop/src/";
+    Shop shop = new Shop();
+
+    public ShopTest() throws IOException {
+    }
+
+    @org.junit.jupiter.api.Test
+    public void getPriceCalculation() throws IOException {
+        shop.getPriceCalculation("music",10);
+    }
 
     @org.junit.jupiter.api.Test
     public void test_multiply_numbers_ProductTypeRates() throws IOException {
-        JSONObject productTypeRatesJson = getProductTypeRatesJson();
+        JSONObject productTypeRatesJson = shop.getProductTypeRatesJson();
         Integer number10 = (Integer) productTypeRatesJson.get("music");
         assertEquals(number10 * number10, 100);
     }
 
     @org.junit.jupiter.api.Test
     public void test_multiply_numbers_from_json1() throws IOException {
-        JSONObject productsJson = getProductsJson();
+        JSONObject productsJson = shop.getProductsJson();
         JSONObject book = productsJson.getJSONObject("book");
         BigDecimal price = (BigDecimal) book.get("price");
         System.out.println(price);
@@ -33,11 +44,11 @@ public class ShopTest {
 
     @org.junit.jupiter.api.Test
     public void test_multiply_ProductTypeRates_Products() throws IOException {
-        JSONObject productTypeRatesJson = getProductTypeRatesJson();
+        JSONObject productTypeRatesJson = shop.getProductTypeRatesJson();
         Integer number10 = (Integer) productTypeRatesJson.get("music");
         assertEquals(number10 * number10, 100);
 
-        JSONObject productsJson = getProductsJson();
+        JSONObject productsJson = shop.getProductsJson();
         JSONObject book = productsJson.getJSONObject("book");
         BigDecimal price = (BigDecimal) book.get("price");
         System.out.println(price);
@@ -50,7 +61,7 @@ public class ShopTest {
 
     @org.junit.jupiter.api.Test
     public void checkProductMusicHasTypeMusic() throws IOException {
-        JSONObject productsJsonObj = getProductsJson();
+        JSONObject productsJsonObj = shop.getProductsJson();
         JSONObject musicJobj = productsJsonObj.getJSONObject("music");
         Object type = musicJobj.get("type");
         String musicTypeStr = type.toString();
@@ -59,8 +70,8 @@ public class ShopTest {
 
     @org.junit.jupiter.api.Test
     public void name_of_productTypesRates_areIn_products() throws IOException {
-        JSONObject productsJson = getProductsJson();
-        JSONObject productTypeRatesJson = getProductTypeRatesJson();
+        JSONObject productsJson = shop.getProductsJson();
+        JSONObject productTypeRatesJson = shop.getProductTypeRatesJson();
 
         Map<String, Object> productsMap = productsJson.toMap();
         Map<String, Object> productTypeRatesMap = productTypeRatesJson.toMap();
@@ -71,7 +82,7 @@ public class ShopTest {
 
     @org.junit.jupiter.api.Test
     public void readAllProducts() throws IOException {
-        JSONObject productsJson = getProductsJson();
+        JSONObject productsJson = shop.getProductsJson();
 
         Map<String, Object> productsMap = productsJson.toMap();
 
@@ -102,15 +113,15 @@ public class ShopTest {
     //    1 book at 12.49
     @org.junit.jupiter.api.Test
     public void buy1book() throws IOException {
-        JSONObject productsJson = getProductsJson();
+        JSONObject productsJson = shop.getProductsJson();
         Object price = productsJson.getJSONObject("book").get("price");
         assertEquals(price.toString(), "12.49");
     }
 
     @org.junit.jupiter.api.Test
     public void buy1music_CD() throws IOException {
-        JSONObject productsJson = getProductsJson();
-        JSONObject productTypeRatesJson = getProductTypeRatesJson();
+        JSONObject productsJson = shop.getProductsJson();
+        JSONObject productTypeRatesJson = shop.getProductTypeRatesJson();
         BigDecimal price = (BigDecimal) productsJson.getJSONObject("music").get("price");
         double p = price.doubleValue();
         System.out.println(">" + price + "<");
@@ -134,26 +145,5 @@ public class ShopTest {
         assertEquals(sum, 14.99);
     }
 
-    private JSONObject getProductsJson() throws IOException {
-        String productsPath = pathDirtyBugFixBecausePathWillNotFoundEverySecondTime + "/products.json";
-        File productsFile = new File(productsPath);
-        FileInputStream productsInputStream = new FileInputStream(productsFile);
-        byte[] data = new byte[(int) productsFile.length()];
-        productsInputStream.read(data);
-        productsInputStream.close();
-        String productsStr = new String(data, StandardCharsets.UTF_8);
-        return new JSONObject(productsStr);
-    }
-
-    private JSONObject getProductTypeRatesJson() throws IOException {
-        String productTypesRatePath = pathDirtyBugFixBecausePathWillNotFoundEverySecondTime + "/productTypesRate.json";
-        File productTypeRatesFile = new File(productTypesRatePath);
-        FileInputStream productTypeRatesInputStream = new FileInputStream(productTypeRatesFile);
-        byte[] data = new byte[(int) productTypeRatesFile.length()];
-        productTypeRatesInputStream.read(data);
-        productTypeRatesInputStream.close();
-        String productTypeRatesStr = new String(data, StandardCharsets.UTF_8);
-        return new JSONObject(productTypeRatesStr);
-    }
 
 }
